@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:projf_lojaarcana/screens/perfillogado_page.dart";
+import "package:projf_lojaarcana/screens/perfildeslogado_page.dart";
 
 class InicioPage extends StatelessWidget {
   const InicioPage({super.key});
@@ -12,9 +12,10 @@ class InicioPage extends StatelessWidget {
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Center(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
+            child: SingleChildScrollView(
+              child:  Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -68,7 +69,6 @@ class InicioPage extends StatelessWidget {
                           ),
                         ],
                       ),
-
                       Container(
                         width: 40,
                         height: 40,
@@ -90,7 +90,6 @@ class InicioPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 15),
-
                   Row(
                     children: [
                       Expanded(
@@ -123,7 +122,6 @@ class InicioPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 15),
-
                       Container(
                         width: 50,
                         height: 50,
@@ -142,7 +140,6 @@ class InicioPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 30),
-
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -185,9 +182,7 @@ class InicioPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-
                             SizedBox(height: 6),
-
                             Text(
                               "Personalize camisetas,\ncanecas e muito mais.",
                               style: TextStyle(
@@ -195,23 +190,17 @@ class InicioPage extends StatelessWidget {
                                 fontSize: 14,
                               ),
                             ),
-
                             SizedBox(height: 15),
-
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 foregroundColor: Colors.deepPurple,
-
                                 elevation: 4,
-
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-
                               onPressed: () {},
-
                               child: Text(
                                 "Explorar agora ->",
                                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -222,13 +211,10 @@ class InicioPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 35),
-
+                  SizedBox(height: 25),
                   Row(
                     spacing: 5,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                     children: [
                       categorias(Icons.checkroom, "Camisetas"),
                       categorias(Icons.coffee, "Canecas"),
@@ -236,8 +222,7 @@ class InicioPage extends StatelessWidget {
                       categorias(Icons.draw, "Personalizados"),
                     ],
                   ),
-                  SizedBox(height: 10),
-
+                  SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -261,43 +246,44 @@ class InicioPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      produtos(
-                        "Camiseta Hollow Knight",
-                        "R\$ 89,90",
-                        "asset/images/camisa.png",
-                      ),
 
-                      SizedBox(width: 8),
-
-                      produtos(
-                        "Caneca gamer Link",
-                        "R\$ 59,90",
-                        "asset/images/caneca.png",
-                      ),
-
-                      SizedBox(width: 8),
-
-                      produtos(
-                        "Ecobag Harry Potter",
-                        "R\$ 49,90",
-                        "asset/images/ecobag.png",
-                      ),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        produtos(
+                          "Camiseta Hollow Knight",
+                          "R\$ 89,90",
+                          "asset/images/camisa.png",
+                        ),
+                        SizedBox(width: 8),
+                        produtos(
+                          "Caneca gamer Link",
+                          "R\$ 59,90",
+                          "asset/images/caneca.png",
+                        ),
+                        SizedBox(width: 8),
+                        produtos(
+                          "Ecobag Harry Potter",
+                          "R\$ 49,90",
+                          "asset/images/ecobag.png",
+                        ),
+                      ],
+                    ),
                   ),
+                  SizedBox(height: 10),
                 ],
               ),
             ),
           ),
         ),
-
+     ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (index) {
             if (index == 3) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PerfilPage()),
+                MaterialPageRoute(builder: (context) => PerfilDeslogadoPage()),
               );
             }
           },
@@ -333,30 +319,23 @@ Widget categorias(IconData icon, String texto) {
     children: [
       InkWell(
         borderRadius: BorderRadius.circular(5),
-
         onTap: () {},
-
         child: Container(
           width: 50,
           height: 55,
-
           decoration: BoxDecoration(
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(5),
-
             boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
           ),
-
           child: Icon(icon, color: Color(0xFF4B1FA7), size: 30),
         ),
       ),
-
       SizedBox(height: 2),
-
       Text(
         texto,
         style: TextStyle(
-          fontSize: 8,
+          fontSize: 12,
           fontWeight: FontWeight.bold,
           color: Color(0xFF4B1FA7),
         ),
@@ -367,49 +346,39 @@ Widget categorias(IconData icon, String texto) {
 
 Widget produtos(String nome, String preco, String imagem) {
   return Container(
-    width: 115,
-
+    width: 160,
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(18),
-
       boxShadow: [
         BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 3)),
       ],
     ),
-
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-
       children: [
         // IMAGEM + FAVORITO
         Stack(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
-
               child: Container(
-                height: 110,
+                height: 140,
                 width: double.infinity,
                 color: Colors.grey.shade100,
-
                 child: Image.asset(imagem, fit: BoxFit.cover),
               ),
             ),
-
             Positioned(
               top: 8,
               right: 8,
-
               child: Container(
                 width: 24,
                 height: 24,
-
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
                 ),
-
                 child: Icon(
                   Icons.favorite_border,
                   size: 14,
@@ -422,22 +391,18 @@ Widget produtos(String nome, String preco, String imagem) {
 
         Padding(
           padding: const EdgeInsets.all(8),
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
               // NOME
               SizedBox(
                 height: 15,
-
                 child: Text(
                   nome,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-
                   style: TextStyle(
-                    fontSize: 9,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
@@ -449,52 +414,29 @@ Widget produtos(String nome, String preco, String imagem) {
               // SUBTEXTO
               Text(
                 "100% algodão • Premium",
-                style: TextStyle(fontSize: 8, color: Colors.grey[600]),
+                style: TextStyle(fontSize: 10, color: Colors.grey[600]),
               ),
 
               SizedBox(height: 6),
 
-              // PREÇO
-              Text(
-                preco,
-                style: TextStyle(
-                  fontSize: 9,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-
-              // ESTRELAS + BOTÃO
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                 children: [
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.amber, size: 10),
-                      Icon(Icons.star, color: Colors.amber, size: 10),
-                      Icon(Icons.star, color: Colors.amber, size: 10),
-                      Icon(Icons.star, color: Colors.amber, size: 10),
-                      Icon(Icons.star, color: Colors.amber, size: 10),
-
-                      SizedBox(width: 3),
-
-                      Text(
-                        "(86)",
-                        style: TextStyle(fontSize: 8, color: Colors.grey),
-                      ),
-                    ],
+                  Text(
+                    preco,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
-
                   Container(
-                    width: 20,
-                    height: 20,
-
+                    width: 25,
+                    height: 25,
                     decoration: BoxDecoration(
                       color: Color(0xFF4B1FA7),
                       shape: BoxShape.circle,
                     ),
-
                     child: Icon(Icons.add, color: Colors.white, size: 16),
                   ),
                 ],

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:projf_lojaarcana/screens/cadastro_page.dart';
 import 'package:projf_lojaarcana/screens/esqueceusenha_page.dart';
+import 'package:projf_lojaarcana/screens/perfillogado_page.dart';
+
+final TextEditingController emailController = TextEditingController();
+
+final TextEditingController senhaController = TextEditingController();
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +48,7 @@ class LoginPage extends StatelessWidget {
 
                 children: [
                   // LOGO
-                  Image.asset("asset/images/logo_arcana.png", height: 200),
+                  Image.asset("asset/images/logo_arcana.png", height: 150),
 
                   SizedBox(height: 10),
 
@@ -67,6 +73,7 @@ class LoginPage extends StatelessWidget {
 
                   // EMAIL
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       labelText: "E-mail",
@@ -81,8 +88,8 @@ class LoginPage extends StatelessWidget {
 
                   // SENHA
                   TextField(
+                    controller: senhaController,
                     obscureText: true,
-
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -143,7 +150,31 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
 
-                    onPressed: () {},
+                    onPressed: () {
+                       if (
+                        emailController.text == Usuario.email &&
+                        senhaController.text == Usuario.senha
+                      ) {
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PerfilLogado(
+                              nome: Usuario.nome,
+                              email: Usuario.email,
+                            ),
+                          ),
+                        );
+
+                      } else {
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Email ou senha incorretos"),
+                          ),
+                        );
+                      }
+                    },
 
                     child: Text("Entrar"),
                   ),

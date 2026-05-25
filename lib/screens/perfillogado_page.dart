@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:projf_lojaarcana/screens/login_page.dart';
+import 'package:projf_lojaarcana/screens/inicio_page.dart';
 
-class PerfilPage extends StatelessWidget {
-  const PerfilPage({super.key});
+class PerfilLogado extends StatefulWidget {
+
+  final String nome;
+  final String email;
+
+  const PerfilLogado({
+    super.key,
+    required this.nome,
+    required this.email,
+  });
+
+  @override
+  State<PerfilLogado> createState() => _PerfilLogadoState();
+}
+
+class _PerfilLogadoState extends State<PerfilLogado> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.email.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginPage()),
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +70,7 @@ class PerfilPage extends StatelessWidget {
 
                         children: [
                           Text(
-                            "Julia",
+                            (widget.nome),
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -51,7 +81,7 @@ class PerfilPage extends StatelessWidget {
                           SizedBox(height: 4),
 
                           Text(
-                            "julia@email.com",
+                            (widget.email),
                             style: TextStyle(
                               color: Colors.grey[700],
                               fontSize: 15,
@@ -64,7 +94,11 @@ class PerfilPage extends StatelessWidget {
                     // BOTÃO DESLOGAR
                     IconButton(
                       onPressed: () {
-                        // lógica logout
+                        Navigator.pushAndRemoveUntil(
+                          context, 
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                          (route) => false,
+                          );
                       },
 
                       icon: Icon(
@@ -301,10 +335,15 @@ class PerfilPage extends StatelessWidget {
         onTap: (index) {
           // VOLTAR PARA INÍCIO
           if (index == 0) {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const InicioPage(),
+              ),
+            );
           }
         },
-
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: Color(0xFF4B1FA7),
         unselectedItemColor: Colors.grey,
 
